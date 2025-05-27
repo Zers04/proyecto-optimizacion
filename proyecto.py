@@ -1,49 +1,5 @@
 import tkinter as tk
 
-
-"""El cantante Benito-G va a cantar en el Valle del Cauca y su concierto es muy apetecido. Cada ciudad quiere que el concierto quede lo mas cerca posible de
-ellos. La gobernacion ha decidido medir la distancia entre dos ciudades como la distancia Manhattan, que es la distancia en el eje X mas en el eje Y.
-
-Nuestro departamento (Valle del Cauca), para efectos de simplificacion, se representa como un cuadrado perfecto de N km por N km., siendo un plano 
-donde X e Y son positivas; la esquina inferior izquierda marca la posicion (0,0). En este sistema las ciudades estan situadas sobre las intersecciones, es
-decir siempre tienen posiciones enteras. Por ejemplo, si N = 10 una entrada posible seria:
-Ciudad      X Y
-La Union   1 9
-Cali       3 9
-Tulua      2 7
-San Pedro  1 4
-
-
-Sin embargo, con el fin de no alentar los duelos a muerte con cuchillos entre alcaldes, el concierto no puede quedar directamente dentro de una ciudad.
-Asi mismo, tampoco puede quedar “favoreciendo” a una ciudad mas que a otra, es decir que el concierto debe quedar a una distancia donde sea relativamente
-equitativo desplazarse, relativamente hablando.
-
-
-Una implementacioon en un lenguaje deseado:
-
-Debe poder cargarse la entrada dentro de un TextArea que tendra el siguiente formato:
-
-• La primera linea un entero N indicando el tamano del cuadrado que representa al Valle
-
-• La segunda linea un entero M indicando el numero de ciudades}
-
-• Las siguientes M lineas contienen la ubicacion de las ciudades. Cada fila contiene 3 datos separados por un espacio. El primer espacio es el 
-nombre de ciudad, el segundo su posicion en X y el tercero su posicion en Y.
-
-Una entrada de ejemplo es:
-12
-5
-Palmira 2 3
-Cal i 10 2
-Buga 11 0
-Tulua 0 3
-RioFr io 1 2
-
-Se debe tener una interfaz grafica mostrando como es la entrada, un boton de solucionar problema y un campo de texto donde se
-genere codigo que pueda copiar y pegar en MiniZinc.
-
-"""
-
 class App:
     def __init__(self, master):
         # Inicializar la ventana principal
