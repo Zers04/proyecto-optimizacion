@@ -129,10 +129,12 @@ class App:
         
     def generate_minizinc_code(self, N, M, cities):
         # Definimos N y M como enteros
-        code = f"int: N = {N};\n"
-        code += f"int: M = {M};\n\n"
+        code = f"int: N = {N};          % Tamaño del Valle del Cauca \n"
+        code += f"int: M = {M};         % Número de ciudades\n\n"
 
         # Definición del array de ciudades
+        code += "% Ciudades: (nombre, x, y)\n"
+
         code += f"array[1..M] of tuple(string, int, int): ciudades = [\n"
         for i, city in enumerate(cities):
             nombre = city[0]
@@ -144,31 +146,45 @@ class App:
         code += "\n];\n\n"
 
         # Variables del concierto
-        code += "var 0..N: concert_x;\n"
-        code += "var 0..N: concert_y;\n\n"
+        code += "% Variables del concierto\n"
+        code += "var 0..N: concert_x;       % Coordenada x del concierto\n"
+        code += "var 0..N: concert_y;       % Coordenada y del concierto\n\n"
 
         # Distancias Manhattan
-        code += f"array[1..M] of var 0..{(2*(N-1))}: distances;\n\n" 
+        code += f"array[1..M] of var 0..{(2*(N-1))}: distances;   % Distancias a cada ciudad\n\n" 
 
+        # Restricciónes
+        code += "% Restricciones:\n"
+
+        code += "  % Calcular las distancias Manhattan desde el concierto a cada ciudad, no puede superar 2*(N-1)\n"
         code += "constraint\n"
         code += "  forall(i in 1..M)(\n"
         code += "    distances[i] = abs(concert_x - ciudades[i].2) + abs(concert_y - ciudades[i].3)\n"
         code += "  );\n\n"
 
-         # Restricción para que no esté justo en una ciudad
+        code += "  % El concierto no puede estar en la misma posición que ninguna ciudad\n"
         code += "constraint\n"
         code += "  forall(i in 1..M)(\n"
         code += "    concert_x != ciudades[i].2 \\/ concert_y != ciudades[i].3\n"
         code += "  );\n\n"
 
+        code += "  % La diferencia máxima entre distancias es 2 (nadie es favorecido)\n"
+        code += "constraint\n"
+        code += "  max(distances) - min(distances) <= 2;\n\n"
+        
         # Minimizar la distancia máxima
-        code += f"var 0..{2*(N-1)}: max_distance;\n"
-        code += "constraint max_distance = max(distances);\n\n"
+        code += "% Objetivo: Minimizar la distancia máxima \n"
+        code += "var int: max_distance = max(distances);\n"
         code += "solve minimize max_distance;\n\n"
 
         code += "output [\n"
         code += "  \"Concierto en: (\", show(concert_x), \", \", show(concert_y), \")\\n\",\n"
-        code += "  \"Distancia máxima a una ciudad: \", show(max_distance), \"\\n\"\n"
+        code += "  \"Distancia máxima a una ciudad: \", show(max_distance), \"\\n\",\n"
+        code += "  \"Ciudades y sus distancias:\\n\",\n"
+        code += "] ++ [\n"
+        code += "   if i > 1 then \"\\n\" else \"\" endif ++\n"
+        code += "  \"- \" ++ show(ciudades[i].1) ++ \": \" ++ show(distances[i])\n"
+        code += "  | i in 1..M\n"
         code += "];\n"
 
         return code
