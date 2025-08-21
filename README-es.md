@@ -1,7 +1,7 @@
 # 🎶 Proyecto de Optimización: ¿Dónde pongo mi concierto?
 
-[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/Zers04/proyecto-optimizacion/blob/main/README.md)
-[![es](https://img.shields.io/badge/lang-es-blue.svg)](https://github.com/Zers04/proyecto-optimizacion/blob/main/README-es.md)
+[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/Zers04/optimizacion-concierto/blob/main/README.md)
+[![es](https://img.shields.io/badge/lang-es-blue.svg)](https://github.com/Zers04/optimizacion-concierto/blob/main/README-es.md)
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
 ![Tkinter](https://img.shields.io/badge/Tkinter-GUI-orange)
